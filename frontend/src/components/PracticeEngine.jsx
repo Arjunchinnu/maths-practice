@@ -56,7 +56,7 @@ function PracticeEngine({ title, min, max, generate }) {
     return Number.isFinite(number) ? number : null;
   };
 
-  // Check whether two answers are mathematically equivalent
+  // Check mathematically equivalent answers
   const isCorrectAnswer = (userAnswer, correctAnswer) => {
     const userValue = parseAnswer(userAnswer);
     const correctValue = parseAnswer(correctAnswer);
@@ -66,7 +66,7 @@ function PracticeEngine({ title, min, max, generate }) {
     return Math.abs(userValue - correctValue) < 0.000001;
   };
 
-  // Automatically focus input
+  // Automatically focus answer box
   useEffect(() => {
     if (mode === "practice" || mode === "test") {
       inputRef.current?.focus();
@@ -121,6 +121,7 @@ function PracticeEngine({ title, min, max, generate }) {
     setAnswer("");
     setFeedback("");
     setSeconds(0);
+
     answeredRef.current = false;
 
     setMode("practice");
@@ -143,6 +144,7 @@ function PracticeEngine({ title, min, max, generate }) {
     setAnswer("");
     setFeedback("");
     setSeconds(0);
+
     answeredRef.current = false;
 
     setMode("test");
@@ -160,6 +162,7 @@ function PracticeEngine({ title, min, max, generate }) {
       setIndex((i) => i + 1);
       setAnswer("");
       setFeedback("");
+
       answeredRef.current = false;
     } else {
       if (mode === "practice") {
@@ -203,7 +206,7 @@ function PracticeEngine({ title, min, max, generate }) {
     }
   };
 
-  // Handle keyboard and keypad input
+  // Handle answer
   const handleInput = (value) => {
     if (answeredRef.current) return;
 
@@ -233,7 +236,6 @@ function PracticeEngine({ title, min, max, generate }) {
     }
 
     handleInput(newAnswer);
-    inputRef.current?.focus();
   };
 
   const keypadButtons = [
@@ -355,14 +357,15 @@ function PracticeEngine({ title, min, max, generate }) {
 
           <h1>{questions[index].question}</h1>
 
+          {/* Answer Input - No Mobile Keyboard */}
+
           <input
             ref={inputRef}
             type="text"
-            inputMode="decimal"
+            inputMode="none"
             value={answer}
-            onChange={(e) => handleInput(e.target.value)}
-            placeholder="Enter your answer"
-            disabled={answeredRef.current}
+            readOnly
+            placeholder="Use the keypad below"
           />
 
           <p className="feedback">
