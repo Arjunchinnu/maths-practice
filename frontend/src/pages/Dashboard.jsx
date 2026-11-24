@@ -9,7 +9,7 @@ import {
   Calculator,
   Flame,
   Target,
-  BookOpen
+  BookOpen,
 } from "lucide-react";
 
 function Dashboard() {
@@ -18,50 +18,51 @@ function Dashboard() {
   const topics = [
     {
       name: "Multiplication Tables",
-      range: "1–25",
+      range: "1–30",
       description: "Master multiplication tables.",
       icon: <Table2 />,
-      path: "/tables"
+      path: "/tables",
     },
     {
       name: "Fraction - Decimal - Percentage",
       range: "1–20",
       description: "Practise all conversion directions.",
       icon: <Percent />,
-      path: "/conversions"
+      path: "/conversions",
     },
     {
       name: "Squares",
-      range: "1–30",
+      range: "1–50",
       description: "Learn square values.",
       icon: <Square />,
-      path: "/squares"
+      path: "/squares",
     },
     {
       name: "Square Roots",
-      range: "1–30",
+      range: "1–50",
       description: "Practise square root calculations.",
       icon: <Radical />,
-      path: "/square-roots"
+      path: "/square-roots",
     },
     {
       name: "Cubes",
-      range: "1–20",
+      range: "1–30",
       description: "Learn cube values.",
       icon: <Boxes />,
-      path: "/cubes"
+      path: "/cubes",
     },
     {
       name: "Cube Roots",
-      range: "1–20",
+      range: "1–30",
       description: "Practise cube root calculations.",
       icon: <Calculator />,
-      path: "/cube-roots"
-    }
+      path: "/cube-roots",
+    },
   ];
 
   const stats = JSON.parse(
-    localStorage.getItem("mathStats") || '{"completed":0,"correct":0,"tests":0}'
+    localStorage.getItem("mathStats") ||
+      '{"completed":0,"correct":0,"tests":0}',
   );
 
   const accuracy = stats.completed
@@ -70,7 +71,6 @@ function Dashboard() {
 
   return (
     <div className="app-layout">
-
       <aside className="sidebar">
         <h2>🧮 MathMaster</h2>
 
@@ -83,7 +83,6 @@ function Dashboard() {
       </aside>
 
       <main className="main-content">
-
         <header className="topbar">
           <div>
             <h1>Daily Maths Practice</h1>
@@ -102,7 +101,6 @@ function Dashboard() {
         </section>
 
         <section className="stats-grid">
-
           <div className="stat-card">
             <BookOpen />
             <div>
@@ -126,7 +124,6 @@ function Dashboard() {
               <p>Tests Completed</p>
             </div>
           </div>
-
         </section>
 
         <div className="section-title">
@@ -135,14 +132,9 @@ function Dashboard() {
         </div>
 
         <section className="topic-grid">
-
           {topics.map((topic, index) => (
-
             <div className="topic-card" key={index}>
-
-              <div className="topic-icon">
-                {topic.icon}
-              </div>
+              <div className="topic-icon">{topic.icon}</div>
 
               <h3>{topic.name}</h3>
 
@@ -153,13 +145,9 @@ function Dashboard() {
               <button onClick={() => navigate(topic.path)}>
                 Start Practice →
               </button>
-
             </div>
-
           ))}
-
         </section>
-
       </main>
     </div>
   );
