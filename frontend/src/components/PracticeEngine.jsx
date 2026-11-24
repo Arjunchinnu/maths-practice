@@ -88,7 +88,7 @@ function PracticeEngine({ title, min, max, generate }) {
   const saveStats = (correct) => {
     const stats = JSON.parse(
       localStorage.getItem("mathStats") ||
-        '{"completed":0,"correct":0,"tests":0}'
+        '{"completed":0,"correct":0,"tests":0}',
     );
 
     stats.completed += 1;
@@ -132,8 +132,7 @@ function PracticeEngine({ title, min, max, generate }) {
     const list = [];
 
     for (let i = 0; i < count; i++) {
-      const value =
-        Math.floor(Math.random() * (to - from + 1)) + from;
+      const value = Math.floor(Math.random() * (to - from + 1)) + from;
 
       list.push(generate(value));
     }
@@ -172,7 +171,7 @@ function PracticeEngine({ title, min, max, generate }) {
       if (mode === "test") {
         const stats = JSON.parse(
           localStorage.getItem("mathStats") ||
-            '{"completed":0,"correct":0,"tests":0}'
+            '{"completed":0,"correct":0,"tests":0}',
         );
 
         stats.tests += 1;
@@ -239,20 +238,25 @@ function PracticeEngine({ title, min, max, generate }) {
   };
 
   const keypadButtons = [
-    "1", "2", "3",
-    "4", "5", "6",
-    "7", "8", "9",
-    "/", "0", ".",
-    "%", "⌫"
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "/",
+    "0",
+    ".",
+    "%",
+    "⌫",
   ];
 
   return (
     <div className="practice-container">
-
-      <button
-        className="back-button"
-        onClick={() => navigate("/")}
-      >
+      <button className="back-button" onClick={() => navigate("/")}>
         ← Dashboard
       </button>
 
@@ -262,12 +266,9 @@ function PracticeEngine({ title, min, max, generate }) {
 
       {mode === "select" && (
         <div className="practice-settings">
-
           <h2>Choose Practice Mode</h2>
 
-          <button onClick={startPractice}>
-            Serial Practice
-          </button>
+          <button onClick={startPractice}>Serial Practice</button>
 
           <h3>Test Settings</h3>
 
@@ -285,30 +286,25 @@ function PracticeEngine({ title, min, max, generate }) {
               }
             }}
           >
-            {Array.from(
-              { length: max - min + 1 },
-              (_, i) => i + min
-            ).map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
+            {Array.from({ length: max - min + 1 }, (_, i) => i + min).map(
+              (n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ),
+            )}
           </select>
 
           <label> To: </label>
 
-          <select
-            value={to}
-            onChange={(e) => setTo(Number(e.target.value))}
-          >
-            {Array.from(
-              { length: max - from + 1 },
-              (_, i) => i + from
-            ).map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
+          <select value={to} onChange={(e) => setTo(Number(e.target.value))}>
+            {Array.from({ length: max - from + 1 }, (_, i) => i + from).map(
+              (n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ),
+            )}
           </select>
 
           <br />
@@ -330,10 +326,7 @@ function PracticeEngine({ title, min, max, generate }) {
           <br />
           <br />
 
-          <button onClick={startTest}>
-            Start Test
-          </button>
-
+          <button onClick={startTest}>Start Test</button>
         </div>
       )}
 
@@ -341,23 +334,23 @@ function PracticeEngine({ title, min, max, generate }) {
 
       {(mode === "practice" || mode === "test") && (
         <div className="question-card">
-
           <div className="question-info">
-
             <span>
-              Question {index + 1} / {questions.length}
+              Question {index + 1} / {questions.length} <span className="feedback">{feedback}</span>
             </span>
 
             <span>
-              {Math.floor(seconds / 60)}:
-              {String(seconds % 60).padStart(2, "0")}
+              {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
             </span>
-
           </div>
+
+          
 
           <h1>{questions[index].question}</h1>
 
           {/* Answer Input - No Mobile Keyboard */}
+
+          
 
           <input
             ref={inputRef}
@@ -368,14 +361,9 @@ function PracticeEngine({ title, min, max, generate }) {
             placeholder="Use the keypad below"
           />
 
-          <p className="feedback">
-            {feedback}
-          </p>
-
           {/* On-screen Keypad */}
 
           <div className="number-keypad">
-
             {keypadButtons.map((key) => (
               <button
                 key={key}
@@ -394,9 +382,7 @@ function PracticeEngine({ title, min, max, generate }) {
             >
               CLEAR
             </button>
-
           </div>
-
         </div>
       )}
 
@@ -404,30 +390,22 @@ function PracticeEngine({ title, min, max, generate }) {
 
       {mode === "result" && (
         <div className="question-card">
-
           <h2>Practice Completed!</h2>
 
           <h1>
             {score} / {questions.length}
           </h1>
 
-          <h3>
-            Accuracy:{" "}
-            {Math.round((score / questions.length) * 100)}%
-          </h3>
+          <h3>Accuracy: {Math.round((score / questions.length) * 100)}%</h3>
 
           <p>
-            Time Taken: {Math.floor(seconds / 60)} minutes{" "}
-            {seconds % 60} seconds
+            Time Taken: {Math.floor(seconds / 60)} minutes {seconds % 60}{" "}
+            seconds
           </p>
 
-          <button onClick={() => setMode("select")}>
-            Back to Practice
-          </button>
-
+          <button onClick={() => setMode("select")}>Back to Practice</button>
         </div>
       )}
-
     </div>
   );
 }

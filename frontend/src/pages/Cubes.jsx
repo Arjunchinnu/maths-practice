@@ -6,7 +6,7 @@ function Cubes() {
     <PracticeEngine
       title="Cubes"
       min={1}
-      max={20}
+      max={30}
       generate={(n) => ({
         value: n,
         question: `${n}³ = ?`,

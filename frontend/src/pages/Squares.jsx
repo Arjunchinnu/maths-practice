@@ -6,7 +6,7 @@ function Squares() {
     <PracticeEngine
       title="Squares"
       min={1}
-      max={30}
+      max={50}
       generate={(n) => ({
         value: n,
         question: `${n}² = ?`,

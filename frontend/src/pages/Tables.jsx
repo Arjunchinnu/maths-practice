@@ -29,7 +29,7 @@ function Tables() {
 
       <div className="table-grid">
 
-        {Array.from({ length: 25 }, (_, i) => i + 1).map(n => (
+        {Array.from({ length: 30 }, (_, i) => i + 1).map(n => (
 
           <button
             key={n}

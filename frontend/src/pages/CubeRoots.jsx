@@ -6,7 +6,7 @@ function CubeRoots() {
     <PracticeEngine
       title="Cube Roots"
       min={1}
-      max={20}
+      max={30}
       generate={(n) => ({
         value: n,
         question: `∛${n * n * n} = ?`,
